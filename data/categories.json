@@ -1,0 +1,37 @@
+[
+  {
+    "id": "research-synthesis",
+    "name": "Research & Synthesis",
+    "icon": "🔬",
+    "color": "sky",
+    "description": "Deep-dive literature review, paper summarization, and competitive analysis prompt chains."
+  },
+  {
+    "id": "vibe-coding-scaffolding",
+    "name": "Vibe Coding & Scaffolding",
+    "icon": "⚡",
+    "color": "violet",
+    "description": "Zero-to-one MVP generation, component specification templates, interactive UI prototyping."
+  },
+  {
+    "id": "refactoring-code-review",
+    "name": "Refactoring & Code Review",
+    "icon": "🛠️",
+    "color": "amber",
+    "description": "Intent-driven testing, architecture evaluation, legacy code migration."
+  },
+  {
+    "id": "content-course-design",
+    "name": "Content & Course Design",
+    "icon": "🎓",
+    "color": "emerald",
+    "description": "Question-first learning scaffolds, slide deck generation, interactive reading guide workflows."
+  },
+  {
+    "id": "meta-prompting-system-setup",
+    "name": "Meta-Prompting & System Setup",
+    "icon": "🧩",
+    "color": "rose",
+    "description": "System prompt design, evaluation matrices, structured JSON extraction schemas."
+  }
+]

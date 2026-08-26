@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Cookbook — Human-in-the-Loop Recipes</title>
+  <meta name="description" content="A modular repository of human-in-the-loop recipes for augmenting development, research, and ideation with LLMs." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍🍳</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script src="assets/js/theme.js"></script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
+  <a href="#main" class="sr-only-focusable fixed top-2 left-2 z-50 bg-indigo-600 text-white px-3 py-2 rounded-lg">Skip to content</a>
+
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2 font-extrabold text-lg tracking-tight">
+        <span class="text-2xl">🧑‍🍳</span>
+        <span>AI <span class="text-indigo-600 dark:text-indigo-400">Cookbook</span></span>
+      </a>
+      <div class="flex items-center gap-2">
+        <a href="https://github.com/" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          GitHub
+        </a>
+        <button id="theme-toggle" aria-label="Toggle dark mode" class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg">
+          <span id="theme-toggle-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-14 pb-10 text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+        Human-in-the-loop recipes<br class="hidden sm:block" /> for building with LLMs
+      </h1>
+      <p class="max-w-2xl mx-auto text-slate-600 dark:text-slate-400 text-lg mb-8">
+        Repeatable, guided workflows — not autonomous agents — for research, vibe coding, code review, course design, and prompt engineering.
+      </p>
+      <div class="max-w-xl mx-auto relative">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search recipes, problems, tags…"
+          class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-base focus:outline-none focus:ring-2 focus:ring-indigo-400 shadow-sm"
+        />
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-6">
+      <div id="category-filters" class="flex flex-wrap gap-2 mb-4 justify-center"></div>
+      <div id="tag-filters" class="flex flex-wrap gap-1.5 justify-center"></div>
+    </section>
+
+    <!-- Results -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">Recipes</h2>
+        <span id="results-count" class="text-sm text-slate-500 dark:text-slate-400"></span>
+      </div>
+      <div id="recipe-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <div id="empty-state" class="hidden text-center py-16">
+        <p class="text-4xl mb-3">🍳</p>
+        <p class="text-slate-600 dark:text-slate-400">No recipes match your filters. Try clearing search or tags.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 text-sm text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <span>AI Cookbook — a static, human-in-the-loop prompt recipe hub.</span>
+      <span>Add your own recipes via <code class="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">data/recipes/*.json</code></span>
+    </div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+:root {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Prompt template code block */
+.prompt-block {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+}
+
+.prompt-var {
+  color: rgb(217 70 239);
+  background: rgba(217, 70, 239, 0.1);
+  border-radius: 4px;
+  padding: 0 2px;
+  font-weight: 600;
+}
+html.dark .prompt-var {
+  color: rgb(240 171 252);
+  background: rgba(240, 171, 252, 0.12);
+}
+
+/* Copy button feedback */
+.copy-btn[data-copied="true"] {
+  background-color: rgb(16 185 129) !important;
+  color: white !important;
+  border-color: rgb(16 185 129) !important;
+}
+
+/* Scrollbar (webkit) for code blocks */
+.prompt-block::-webkit-scrollbar,
+.scroll-area::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.prompt-block::-webkit-scrollbar-thumb,
+.scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.5);
+  border-radius: 4px;
+}
+
+/* Recipe card hover */
+.recipe-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.recipe-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Fade-in for dynamically rendered content */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in {
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Tag chip active state */
+.tag-chip.active {
+  background-color: rgb(99 102 241) !important;
+  color: white !important;
+  border-color: rgb(99 102 241) !important;
+}
+
+/* Skip-to-content for a11y, visually hidden until focused */
+.sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}

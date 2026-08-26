@@ -1,0 +1,45 @@
+{
+  "id": "question-first-learning-scaffold",
+  "title": "Question-First Learning Scaffold",
+  "category": "content-course-design",
+  "difficulty": "Beginner",
+  "targetLLMs": ["Claude", "Gemini", "OpenAI"],
+  "estTime": "30–50 min",
+  "tags": ["education", "course-design", "content", "ideation"],
+  "problem": "Asking a model to 'explain X' produces lecture-style content dumps that don't match how learners actually get stuck. Lessons land better when they're designed around the sequence of questions a real beginner would ask, not the logical structure an expert would use to explain the topic.",
+  "workflow": [
+    {
+      "step": "1. Define the learning outcome",
+      "detail": "Write one sentence describing what the learner can DO after this lesson — not what they'll 'understand' or 'know'."
+    },
+    {
+      "step": "2. Generate the question ladder",
+      "detail": "Ask the model for the sequence of questions a genuine beginner would ask, moving from confusion toward competence."
+    },
+    {
+      "step": "3. Human reorder & prune",
+      "detail": "Reorder or cut questions based on what actually confuses your real audience — the model's default ordering is a starting guess, not ground truth."
+    },
+    {
+      "step": "4. Answer each question as a micro-lesson",
+      "detail": "For each question: a short answer, one concrete example, and one check-for-understanding question. One prompt per question keeps each micro-lesson tight."
+    },
+    {
+      "step": "5. Assemble & add transitions",
+      "detail": "Stitch the micro-lessons together and ask the model to write only the connective sentences between them — don't let it pad with new content here."
+    }
+  ],
+  "promptTemplate": "Design a question-first lesson scaffold.\n\nTOPIC:\n{{TOPIC}}\n\nLEARNING OUTCOME (what the learner can DO afterward):\n{{OUTCOME}}\n\nLEARNER BACKGROUND:\n{{BACKGROUND}}\n\n1. List 5-8 questions, in the order a real beginner would naturally ask them, that lead from confusion to the stated outcome.\n2. For each question, write a micro-lesson: a 2-4 sentence answer, one concrete example, and one check-for-understanding question.\n3. Flag any question that depends on a prerequisite the learner may not have, given their background.",
+  "variables": [
+    { "name": "TOPIC", "label": "Topic", "placeholder": "e.g. Git rebase vs. merge", "default": "" },
+    { "name": "OUTCOME", "label": "Learning outcome", "placeholder": "e.g. Choose the right one for a given branch situation and do it without fear", "default": "" },
+    { "name": "BACKGROUND", "label": "Learner background", "placeholder": "e.g. Comfortable with git add/commit/push, has never touched branching", "default": "" }
+  ],
+  "exampleOutput": "1. **\"What's actually different about rebase vs. merge?\"** — A merge keeps both histories and adds a merge commit; a rebase replays your commits on top of the other branch, producing a linear history. Example: ... Check: \"If you rebase, does the other branch's history change?\"\n2. **\"Why would I ever want a messier merge-commit history?\"** — ...\n\n⚠️ Flag: Question 4 assumes familiarity with `git log --graph`, which isn't in the stated background — add a quick primer.",
+  "tips": [
+    "Pilot the question ladder on one real learner before writing full micro-lessons — the first-pass ordering is often wrong.",
+    "For slide decks, let each question become one slide title; don't let the model add extra 'context' slides — that's how decks get bloated.",
+    "Works well iteratively: when a real learner asks a confused question you didn't anticipate, paste it back in as a new BACKGROUND note to patch the gap.",
+    "Keep answers to the stated 2-4 sentences — a question-first scaffold that answers in paragraphs has just become a lecture again."
+  ]
+}

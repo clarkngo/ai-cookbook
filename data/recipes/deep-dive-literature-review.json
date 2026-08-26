@@ -1,0 +1,50 @@
+{
+  "id": "deep-dive-literature-review",
+  "title": "Deep-Dive Literature Review Chain",
+  "category": "research-synthesis",
+  "difficulty": "Intermediate",
+  "targetLLMs": ["Claude", "Gemini", "OpenAI"],
+  "estTime": "45–90 min",
+  "tags": ["research", "synthesis", "literature-review", "academic"],
+  "problem": "Synthesizing a pile of papers or sources into a coherent, trustworthy overview is slow by hand and unreliable in one shot — a single mega-prompt over dozens of sources tends to blur distinct findings together, invent citations, and flatten disagreements between sources into false consensus.",
+  "workflow": [
+    {
+      "step": "1. Scope & question framing",
+      "detail": "Before touching sources, define the research question and its boundaries with the model: what's in scope, what's explicitly excluded, and what would count as a satisfying answer."
+    },
+    {
+      "step": "2. Source triage",
+      "detail": "Paste abstracts or key excerpts (not full papers yet) and ask the model to cluster them into 3–6 themes, flagging any source that seems weak, off-topic, or contradictory."
+    },
+    {
+      "step": "3. Per-cluster deep read",
+      "detail": "For each theme, feed in the actual source text and ask for claims, supporting evidence, and stated limitations — one theme per prompt, so context doesn't get diluted."
+    },
+    {
+      "step": "4. Cross-cluster synthesis",
+      "detail": "Run the Prompt Template below with all theme summaries as input, asking the model to reconcile agreements, disagreements, and gaps across themes."
+    },
+    {
+      "step": "5. Human verification pass",
+      "detail": "Check every citation and claim in the output against the original source text yourself before you trust or publish it. This step is not optional — treat model citations as claims to verify, not facts."
+    },
+    {
+      "step": "6. Final synthesis draft",
+      "detail": "Once verified, ask the model to compose the polished write-up using only the claims you've confirmed."
+    }
+  ],
+  "promptTemplate": "You are a research analyst helping synthesize literature on {{TOPIC}}.\n\nCONTEXT:\n{{CONTEXT}}\n\nI have gathered sources organized into these themes:\n{{THEMES}}\n\nOBJECTIVE:\n{{OBJECTIVE}}\n\nFor each theme:\n1. Summarize the consensus view in 2-3 sentences.\n2. Note any contradicting findings and who holds them.\n3. Identify one open question or gap.\n\nThen write a 200-word cross-theme synthesis that connects the themes to the objective above. Cite sources using the format (Author, Year) exactly as given in the theme notes — do not invent citations or infer authors not present in my input.",
+  "variables": [
+    { "name": "TOPIC", "label": "Research Topic", "placeholder": "e.g. Retrieval-augmented generation for code search", "default": "" },
+    { "name": "CONTEXT", "label": "Context / why this matters", "placeholder": "e.g. Scoping a technical decision for our search infra", "default": "" },
+    { "name": "THEMES", "label": "Themes with source notes", "placeholder": "Theme 1: Chunking strategies — (Lee, 2023) found...\nTheme 2: Reranking — (Ma, 2024) found...", "default": "" },
+    { "name": "OBJECTIVE", "label": "What the synthesis should conclude toward", "placeholder": "e.g. A recommendation on chunking strategy for our codebase", "default": "" }
+  ],
+  "exampleOutput": "### Theme: Chunking Strategies\nConsensus: Fixed-size chunking underperforms semantic/AST-aware chunking for code retrieval (Lee, 2023; Patel, 2023).\nContradiction: Patel (2023) finds diminishing returns above 512 tokens; Lee (2023) reports gains up to 1024.\nGap: Neither study tests multi-language repos.\n\n### Cross-Theme Synthesis\nAcross chunking and reranking literature, the strongest gains for code search come from combining AST-aware chunking with a lightweight reranker (Lee, 2023; Ma, 2024)...",
+  "tips": [
+    "Never let the model fetch or browse papers it wasn't given — always paste the actual abstract or excerpt text so it can't hallucinate a citation.",
+    "Gemini's long context window is well-suited to Step 3 — dump full paper text rather than just abstracts when doing the per-cluster deep read.",
+    "For local LLMs (Ollama) with small context windows, keep the per-theme extraction calls short and run more of them rather than one giant context dump.",
+    "Run the human verification pass line by line against the source text — this recipe fails silently if you skip it."
+  ]
+}

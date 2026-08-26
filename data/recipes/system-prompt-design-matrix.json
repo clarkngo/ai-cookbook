@@ -1,0 +1,46 @@
+{
+  "id": "system-prompt-design-matrix",
+  "title": "System Prompt Design Matrix",
+  "category": "meta-prompting-system-setup",
+  "difficulty": "Advanced",
+  "targetLLMs": ["Claude", "OpenAI", "Ollama"],
+  "estTime": "40–70 min",
+  "tags": ["meta-prompting", "system-prompt", "evaluation", "local-llm"],
+  "problem": "System prompts written as one long freeform paragraph are hard to debug: when behavior drifts after an edit, it's unclear which sentence caused which change. Without a way to test individual behaviors, every 'fix' risks silently breaking something that worked before.",
+  "workflow": [
+    {
+      "step": "1. List behaviors, not vibes",
+      "detail": "Enumerate the specific behaviors you want and don't want as short, testable statements — not adjectives like 'helpful' or 'concise'."
+    },
+    {
+      "step": "2. Draft in sections",
+      "detail": "Run the Prompt Template to organize behaviors into a structured system prompt: Role, Behaviors, Constraints, Output Format."
+    },
+    {
+      "step": "3. Build an eval matrix",
+      "detail": "For each behavior, get one test input that should trigger it, plus what a pass and a fail look like."
+    },
+    {
+      "step": "4. Run the matrix",
+      "detail": "Test the draft prompt against every row by hand (or scripted) and note which rows fail."
+    },
+    {
+      "step": "5. Patch, don't rewrite",
+      "detail": "Fix only the section responsible for a failing row, then re-run just that row — resist rewriting the whole prompt, which reintroduces regressions you already fixed."
+    }
+  ],
+  "promptTemplate": "Help me turn a list of desired behaviors into a structured system prompt.\n\nROLE:\n{{ROLE}}\n\nDESIRED BEHAVIORS (numbered list):\n{{BEHAVIORS}}\n\nTHINGS IT MUST NEVER DO:\n{{CONSTRAINTS}}\n\nOUTPUT FORMAT REQUIREMENTS:\n{{OUTPUT_FORMAT}}\n\n1. Draft a system prompt organized into clear sections (Role, Behaviors, Constraints, Output Format).\n2. For each behavior, propose one test input and the expected pass/fail signal, as a table.\n3. Flag any behaviors that conflict with each other or with the constraints.",
+  "variables": [
+    { "name": "ROLE", "label": "Role", "placeholder": "e.g. A customer support agent for a SaaS billing product", "default": "" },
+    { "name": "BEHAVIORS", "label": "Desired behaviors", "placeholder": "1. Always ask for the account email before discussing billing details\n2. Offer a refund only for charges within 30 days", "default": "" },
+    { "name": "CONSTRAINTS", "label": "Hard constraints", "placeholder": "e.g. Never promise a refund amount before verifying the account", "default": "" },
+    { "name": "OUTPUT_FORMAT", "label": "Output format requirements", "placeholder": "e.g. Plain text, no markdown, under 120 words per reply", "default": "" }
+  ],
+  "exampleOutput": "**System Prompt (draft)**\n> ROLE: You are a billing support agent...\n> BEHAVIORS: 1) Ask for account email before discussing billing...\n> CONSTRAINTS: Never promise a refund amount before verifying the account...\n\n**Eval matrix**\n| Behavior | Test input | Pass signal |\n|---|---|---|\n| Asks for email first | \"I want a refund\" | Reply asks for account email before any refund talk |\n| Refund only within 30 days | \"Charged 45 days ago, refund?\" | Reply declines and explains the 30-day window |\n\n⚠️ Conflict flagged: Behavior 2 (offer refunds within 30 days) vs. Constraint (never promise an amount before verification) — clarify whether verification can happen within the same reply.",
+  "tips": [
+    "Keep the eval matrix as a living file next to the system prompt and re-run it after every edit, not just at the end of a session.",
+    "Local LLMs (Ollama, smaller models) follow positive instructions more reliably than negative ones — say 'respond in under 100 words' rather than 'don't be verbose'.",
+    "For structured JSON extraction schemas, add a matrix row that feeds deliberately malformed input and checks the model fails closed instead of hallucinating fields.",
+    "When two behaviors conflict, resolve it explicitly in the prompt (state which one wins and when) rather than hoping the model guesses your priority."
+  ]
+}
