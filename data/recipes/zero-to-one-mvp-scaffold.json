@@ -1,0 +1,50 @@
+{
+  "id": "zero-to-one-mvp-scaffold",
+  "title": "Zero-to-One MVP Scaffold",
+  "category": "vibe-coding-scaffolding",
+  "difficulty": "Beginner",
+  "targetLLMs": ["Claude", "OpenAI", "Ollama"],
+  "estTime": "30–60 min",
+  "tags": ["scaffolding", "mvp", "ideation", "frontend", "vibe-coding"],
+  "problem": "Going from a vague idea to a working MVP wastes time on boilerplate decisions — which stack, what folder structure, which components — before you ever get to 'vibe code' the actual feature. Left unconstrained, models also tend to scaffold auth, settings, and admin panels before the core action even works.",
+  "workflow": [
+    {
+      "step": "1. Idea brief",
+      "detail": "Describe the product idea, the target user, and the single core action in plain language — no jargon, no feature list yet."
+    },
+    {
+      "step": "2. Stack & architecture proposal",
+      "detail": "Ask the model for 2–3 stack options with tradeoffs (favor boring, well-documented tools over novel ones). You pick one."
+    },
+    {
+      "step": "3. Scaffold generation",
+      "detail": "Run the Prompt Template to generate a directory tree, file stubs, and package manifest — scoped tightly to the core action."
+    },
+    {
+      "step": "4. Core loop implementation",
+      "detail": "Generate the code for the single most important user flow first. Explicitly defer auth, settings, and edge cases."
+    },
+    {
+      "step": "5. Human review & run",
+      "detail": "Run it locally yourself. Note exactly what's broken or confusing — don't just ask the model to 'fix it', capture specifics."
+    },
+    {
+      "step": "6. Iterate in small diffs",
+      "detail": "Feed back the specific errors or friction as targeted follow-up prompts against the existing code, rather than regenerating the whole scaffold."
+    }
+  ],
+  "promptTemplate": "Act as a senior product engineer. I want to scaffold a minimal, working MVP.\n\nIDEA:\n{{IDEA}}\n\nTARGET USER:\n{{TARGET_USER}}\n\nCORE ACTION (the one thing this MVP must let a user do):\n{{CORE_ACTION}}\n\nCONSTRAINTS:\n{{CONSTRAINTS}}\n\n1. Propose a minimal tech stack (favor boring, well-documented tools).\n2. Output a file/directory tree for the scaffold — no more than what's needed for the core action.\n3. Generate the code for the core action's happy path only. Skip auth, settings, and edge cases unless listed in constraints.\n4. List the exact commands to install and run it locally.",
+  "variables": [
+    { "name": "IDEA", "label": "Product idea", "placeholder": "e.g. A tool that turns a meeting transcript into a to-do list", "default": "" },
+    { "name": "TARGET_USER", "label": "Target user", "placeholder": "e.g. Busy engineering managers", "default": "" },
+    { "name": "CORE_ACTION", "label": "Core action", "placeholder": "e.g. Paste a transcript, get back a checklist", "default": "" },
+    { "name": "CONSTRAINTS", "label": "Constraints", "placeholder": "e.g. No backend/database — client-side only, deployable as a static site", "default": "" }
+  ],
+  "exampleOutput": "**Stack:** Vite + React + Tailwind (client-only, no backend needed for the core loop).\n\n```\ntranscript-todo/\n├── index.html\n├── src/\n│   ├── main.jsx\n│   ├── App.jsx        # paste box + generated checklist\n│   └── extract.js      # transcript -> action items (calls LLM API)\n└── package.json\n```\n\n`App.jsx` renders a textarea, an 'Extract' button, and a checklist — no auth, no settings page.\n\n**Run it:**\n```bash\nnpm install\nnpm run dev\n```",
+  "tips": [
+    "Ask for the 'core loop' only first — resist letting the model scaffold auth, settings, or an admin panel before the core action works end to end.",
+    "Paste this as the first message in a fresh session so the scaffold isn't biased by unrelated prior context in the chat.",
+    "For local LLMs with weaker code generation, narrow CORE_ACTION to roughly one file's worth of logic per prompt rather than a whole feature.",
+    "When you hit a bug in Step 5, paste the exact error and the relevant file back in — don't ask for a full regeneration, which tends to introduce new bugs while fixing the old one."
+  ]
+}

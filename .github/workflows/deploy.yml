@@ -1,5 +1,5 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Deploys the AI Cookbook static site (no build step) to GitHub Pages.
+name: Deploy AI Cookbook to Pages
 
 on:
   # Runs on pushes targeting the default branch
