@@ -1,0 +1,46 @@
+{
+  "id": "udl-accessibility-pass",
+  "title": "Universal Design for Learning (UDL) Accessibility Pass",
+  "category": "content-course-design",
+  "difficulty": "Intermediate",
+  "targetLLMs": ["Claude", "OpenAI", "Ollama"],
+  "estTime": "30–50 min",
+  "tags": ["higher-education", "accessibility", "udl", "inclusive-design"],
+  "problem": "Course materials designed for a single 'default' learner — one reading level, one format, one pace — routinely underserve students with disabilities, English-language learners, and anyone outside the instructor's original assumptions. A full UDL redesign of an entire course is too time-consuming to do from scratch for every lesson.",
+  "workflow": [
+    {
+      "step": "1. Pick one lesson and state its outcome",
+      "detail": "UDL passes work best applied lesson-by-lesson, not to a whole syllabus at once."
+    },
+    {
+      "step": "2. Audit against the three UDL principles",
+      "detail": "Run the Prompt Template to check the current material for multiple means of engagement, representation, and action/expression."
+    },
+    {
+      "step": "3. Human prioritization",
+      "detail": "The model will likely surface more gaps than you can fix before the next class. Pick the 1–2 highest-impact fixes for your actual student population."
+    },
+    {
+      "step": "4. Generate alternatives for just those fixes",
+      "detail": "E.g. an audio version of a reading, a scaffolded worked example, or a choice of output format for the assignment."
+    },
+    {
+      "step": "5. Confirm formal accessibility compliance separately",
+      "detail": "A UDL pass improves pedagogy but does not substitute for your institution's actual accessibility/ADA review — captioning, screen-reader testing, and documented accommodations still need their own process."
+    }
+  ],
+  "promptTemplate": "Apply a Universal Design for Learning (UDL) audit to this lesson.\n\nLESSON / MODULE:\n{{LESSON}}\n\nLEARNING OUTCOME:\n{{OUTCOME}}\n\nCURRENT MATERIALS & FORMAT:\n{{CURRENT_MATERIALS}}\n\nKNOWN STUDENT NEEDS IN THIS SECTION (if any):\n{{STUDENT_NEEDS}}\n\n1. Audit the current materials against the three UDL principles: multiple means of engagement, representation, and action/expression. List specific gaps, not generic ones.\n2. Rank the gaps by likely impact on the students described above.\n3. For the top 2 gaps, propose a concrete, low-effort fix I could implement before the next class.",
+  "variables": [
+    { "name": "LESSON", "label": "Lesson / module", "placeholder": "e.g. Week 5: Interpreting regression output", "default": "" },
+    { "name": "OUTCOME", "label": "Learning outcome", "placeholder": "e.g. Interpret coefficients and p-values in a regression table", "default": "" },
+    { "name": "CURRENT_MATERIALS", "label": "Current materials & format", "placeholder": "e.g. 20-slide lecture deck + a single dense reading, no alternative formats", "default": "" },
+    { "name": "STUDENT_NEEDS", "label": "Known student needs (optional)", "placeholder": "e.g. Two students with documented extended-time accommodations; several multilingual learners", "default": "" }
+  ],
+  "exampleOutput": "**Gaps found:**\n- Representation: Only one dense text reading covers the concept — no visual or audio alternative.\n- Action/expression: The homework only accepts a written proof; no option to demonstrate the skill via a worked walkthrough or short recorded explanation.\n\n**Ranked top 2 fixes:**\n1. Add a 5-minute annotated-example video alongside the reading (representation).\n2. Offer a choice: written proof OR a short recorded walkthrough of the same problem (action/expression).",
+  "tips": [
+    "Apply this lesson-by-lesson, not to the whole course at once — a full-course UDL rewrite is a project, not a single prompt.",
+    "This recipe improves pedagogical design; it does not replace your institution's formal accessibility review for students with documented accommodations.",
+    "If STUDENT_NEEDS is unknown, leave it blank and ask for a general UDL best-practice audit rather than letting the model invent assumptions about your students.",
+    "Local LLMs (Ollama) work fine here since the audit is reasoning over text you provide, not requiring broad world knowledge — a good low-cost option to run per-lesson."
+  ]
+}

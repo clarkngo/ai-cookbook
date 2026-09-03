@@ -1,0 +1,46 @@
+{
+  "id": "anatomy-of-a-good-prompt",
+  "title": "The Anatomy of a Good Prompt",
+  "category": "ai-fundamentals",
+  "difficulty": "Beginner",
+  "targetLLMs": ["Claude", "OpenAI", "Gemini", "Ollama"],
+  "estTime": "10–15 min",
+  "tags": ["new-to-ai", "prompting-basics", "getting-started"],
+  "problem": "New users often type a bare question and get a generic, unhelpful answer — then conclude 'AI isn't very good.' Usually the real issue is the prompt is missing the four things a model needs to give a useful answer: who it should act as, what it should actually do, the background that changes what a good answer looks like, and what shape the answer should come back in.",
+  "workflow": [
+    {
+      "step": "1. Name a role, if one helps",
+      "detail": "Optional: tell the model what perspective to answer from (e.g. 'a patient teacher', 'a skeptical editor'). Skip this line entirely if no role naturally applies — it isn't required for every prompt."
+    },
+    {
+      "step": "2. State the actual task in one sentence",
+      "detail": "Say what the output should DO — 'compare', 'explain to a beginner', 'shorten to 100 words' — not just a topic word like 'dogs' or 'taxes'."
+    },
+    {
+      "step": "3. Give context",
+      "detail": "Add the background information that changes what a good answer looks like: your situation, your existing knowledge, or constraints the model can't guess on its own."
+    },
+    {
+      "step": "4. Specify the format",
+      "detail": "State the length, structure, and tone you want back. Without this, you'll get whatever length/style the model defaults to, which is often wrong for your purpose."
+    },
+    {
+      "step": "5. Treat the first answer as a draft",
+      "detail": "If it's not quite right, don't retype from scratch — reply with what's wrong ('too formal', 'shorter', 'add an example') and let the model revise in place."
+    }
+  ],
+  "promptTemplate": "{{ROLE}}\n\nTASK: {{TASK}}\n\nCONTEXT: {{CONTEXT}}\n\nFORMAT: {{FORMAT}}",
+  "variables": [
+    { "name": "ROLE", "label": "Role (optional — delete if not needed)", "placeholder": "e.g. Act as a patient teacher explaining this to a total beginner.", "default": "" },
+    { "name": "TASK", "label": "Task", "placeholder": "e.g. Explain what compound interest is and why it matters", "default": "" },
+    { "name": "CONTEXT", "label": "Context", "placeholder": "e.g. I'm 22, just started my first job, have never taken a finance class", "default": "" },
+    { "name": "FORMAT", "label": "Format", "placeholder": "e.g. Under 150 words, plain language, one concrete number example", "default": "" }
+  ],
+  "exampleOutput": "**Bare prompt:** \"What is compound interest?\" → a generic, textbook-style paragraph.\n\n**Structured prompt (this recipe):** \"Act as a patient teacher... I'm 22, just started my first job, have never taken a finance class... under 150 words, one concrete number example\" → a short, plain-language explanation using a real dollar example tied to a first paycheck — directly usable, no rewriting needed.",
+  "tips": [
+    "Skip the ROLE line if it doesn't naturally apply — it's optional, not a required ingredient.",
+    "If the answer isn't right, don't retype the whole prompt — just say what's wrong and let the model revise; this is faster and usually gets closer to what you wanted.",
+    "This basic shape (role, task, context, format) works the same way across Claude, ChatGPT, Gemini, and local models — it's the model-agnostic starting point behind every other recipe in this cookbook.",
+    "If you're not sure what context matters, try asking the model 'what information would help you answer this better?' before answering — it will often tell you."
+  ]
+}

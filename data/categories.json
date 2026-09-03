@@ -33,5 +33,12 @@
     "icon": "🧩",
     "color": "rose",
     "description": "System prompt design, evaluation matrices, structured JSON extraction schemas."
+  },
+  {
+    "id": "ai-fundamentals",
+    "name": "AI Fundamentals & Everyday Use",
+    "icon": "🌱",
+    "color": "teal",
+    "description": "Prompting basics, everyday writing and decision helpers, and habits for using AI safely — built for people just getting started."
   }
 ]

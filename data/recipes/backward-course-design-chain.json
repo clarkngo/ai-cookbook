@@ -1,0 +1,45 @@
+{
+  "id": "backward-course-design-chain",
+  "title": "Backward Course Design Chain",
+  "category": "content-course-design",
+  "difficulty": "Intermediate",
+  "targetLLMs": ["Claude", "OpenAI", "Gemini"],
+  "estTime": "60–90 min",
+  "tags": ["higher-education", "course-design", "syllabus", "learning-outcomes", "backward-design"],
+  "problem": "Courses drafted topic-first — pick what to lecture on, then bolt on quizzes and exams afterward — routinely produce assessments that don't actually measure the outcomes an instructor cares about. Backward design (start from what students should be able to do, then work back to assessments and content) is well-established in higher-ed pedagogy, but doing it by hand across a whole semester is slow.",
+  "workflow": [
+    {
+      "step": "1. Draft the terminal outcomes",
+      "detail": "Write 3–5 sentences of the form 'By the end of this course, students will be able to [verb] ...' using observable verbs (analyze, design, critique) — not 'understand' or 'know', which can't be assessed directly."
+    },
+    {
+      "step": "2. Design assessments first",
+      "detail": "Run the Prompt Template asking the model to propose, for each outcome, one assessment that would provide direct evidence a student achieved it."
+    },
+    {
+      "step": "3. Human sign-off on assessments",
+      "detail": "Check each proposed assessment against your institution's actual constraints — class size, TA support, LMS capabilities — before proceeding. This is where an AI-proposed assessment meets reality."
+    },
+    {
+      "step": "4. Backfill the content/week map",
+      "detail": "Only now ask the model to propose a week-by-week topic sequence that builds toward the assessments you've already approved."
+    },
+    {
+      "step": "5. Check for orphaned content",
+      "detail": "Ask the model to flag any week's content that doesn't clearly feed into one of the approved assessments, then decide whether to cut it or write a new outcome to justify it."
+    }
+  ],
+  "promptTemplate": "Act as an instructional designer applying backward design (Wiggins & McTighe) to a higher-education course.\n\nCOURSE:\n{{COURSE_TITLE}}\n\nTERMINAL LEARNING OUTCOMES (what students will be able to DO by the end):\n{{OUTCOMES}}\n\nCOURSE CONSTRAINTS:\n{{CONSTRAINTS}}\n\n1. For each outcome, propose one assessment that would provide direct evidence the outcome was met. Prefer authentic tasks over recall-based tests where the outcome supports it.\n2. Propose a week-by-week topic sequence (respecting the course length in constraints) that builds toward these assessments in order.\n3. Flag any week whose content doesn't clearly feed into one of the assessments above.",
+  "variables": [
+    { "name": "COURSE_TITLE", "label": "Course title", "placeholder": "e.g. Intro to Environmental Policy", "default": "" },
+    { "name": "OUTCOMES", "label": "Terminal learning outcomes", "placeholder": "1. Analyze a policy proposal using cost-benefit and equity frameworks\n2. Design a stakeholder engagement plan for a local environmental issue", "default": "" },
+    { "name": "CONSTRAINTS", "label": "Course constraints", "placeholder": "e.g. 14-week semester, 2 sessions/week, 45 students, 1 TA, no final exam slot", "default": "" }
+  ],
+  "exampleOutput": "**Outcome 1 → Assessment:** A 3-page policy memo where students apply a cost-benefit and equity framework to a real proposal (authentic task, direct evidence of 'analyze').\n\n**Week map (excerpt):**\n- Weeks 1–2: Frameworks for policy analysis (feeds memo rubric criterion 1)\n- Weeks 3–4: Equity lenses in environmental policy (feeds criterion 2)\n- Week 7: Guest lecture on local zoning — ⚠️ flagged: doesn't map to either assessment; either cut or add a reflection question tying it to Outcome 2.",
+  "tips": [
+    "Use observable verbs in your outcomes (Bloom's taxonomy helps) — 'understand X' can't be assessed directly, but 'critique X' can.",
+    "Get your assessments approved by your department or accreditation body before generating the week-by-week map — reworking content around a rejected assessment wastes the whole chain.",
+    "For gen-ed or accreditation-mapped courses, paste your program-level learning outcomes into CONSTRAINTS so the model checks that course outcomes actually ladder up to them.",
+    "Keep the terminal outcomes to 3–5 — a longer list is a sign you're describing weekly topics, not course-level outcomes."
+  ]
+}

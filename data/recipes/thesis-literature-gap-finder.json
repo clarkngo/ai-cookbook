@@ -1,0 +1,45 @@
+{
+  "id": "thesis-literature-gap-finder",
+  "title": "Thesis Literature Gap Finder",
+  "category": "research-synthesis",
+  "difficulty": "Advanced",
+  "targetLLMs": ["Claude", "Gemini", "OpenAI"],
+  "estTime": "60–90 min",
+  "tags": ["higher-education", "grad-school", "thesis", "literature-review", "research"],
+  "problem": "Graduate students drafting a thesis or dissertation lit review often summarize what's already been studied but struggle to sharply articulate the specific, defensible gap their own work fills. The most common advisor feedback — 'so what hasn't been done, and why does that matter?' — usually means the gap was described too vaguely to defend.",
+  "workflow": [
+    {
+      "step": "1. Map the field, not just your topic",
+      "detail": "Ask the model to organize your source notes into the sub-questions the field has already answered, before talking about your own project at all."
+    },
+    {
+      "step": "2. Ask for the gap explicitly",
+      "detail": "Run the Prompt Template with your mapped sub-questions and proposed methodology to get candidate gap statements."
+    },
+    {
+      "step": "3. Stress-test each candidate gap",
+      "detail": "For every candidate, ask 'has anyone actually done this?' and go verify against the real literature yourself — models are prone to confidently declaring a gap that's already been published."
+    },
+    {
+      "step": "4. Get advisor sign-off",
+      "detail": "Bring the sharpened gap statement to your advisor before writing the full review around it. This is a supervision checkpoint, not a step to skip."
+    },
+    {
+      "step": "5. Write the review argued toward the gap",
+      "detail": "Regenerate the literature review section using the confirmed gap as the throughline, rather than as a neutral, undirected survey."
+    }
+  ],
+  "promptTemplate": "Help me identify a defensible research gap for a thesis in {{FIELD}}.\n\nWHAT THE FIELD HAS ALREADY ESTABLISHED (from my source notes):\n{{ESTABLISHED_FINDINGS}}\n\nMY PROPOSED METHODOLOGY / ANGLE:\n{{METHODOLOGY}}\n\n1. Organize the established findings into the sub-questions the field has already answered.\n2. Identify 2-3 candidate gaps — specific, narrow claims about what hasn't been addressed — that my proposed methodology could plausibly fill.\n3. For each candidate gap, state exactly what evidence would be needed to prove it's a real gap (not already covered), so I can go verify it myself.",
+  "variables": [
+    { "name": "FIELD", "label": "Field", "placeholder": "e.g. Organizational psychology", "default": "" },
+    { "name": "ESTABLISHED_FINDINGS", "label": "Established findings (from your source notes)", "placeholder": "Remote work reduces burnout for high-autonomy roles (Lee, 2022)...\nHybrid schedules show mixed effects on team cohesion (Osei, 2023)...", "default": "" },
+    { "name": "METHODOLOGY", "label": "Your proposed methodology / angle", "placeholder": "e.g. Longitudinal survey of low-autonomy manufacturing roles moved to hybrid schedules", "default": "" }
+  ],
+  "exampleOutput": "**Sub-questions already answered:** (1) Does remote work reduce burnout in high-autonomy roles? (2) What are hybrid schedules' effects on team cohesion?\n\n**Candidate gap:** Existing burnout research concentrates on high-autonomy knowledge work; low-autonomy roles moved to hybrid schedules are largely unstudied.\n\n**To verify this is real:** Search for any longitudinal study of hybrid/remote transitions specifically in low-autonomy or manufacturing-adjacent roles published in the last 5 years — if none exists, the gap holds.",
+  "tips": [
+    "Never accept a model's claimed gap without checking it yourself — 'no one has studied X' is exactly the kind of claim LLMs confidently get wrong.",
+    "Bring the sharpened gap statement to your advisor before writing the full review — a wrong gap caught after a full draft costs weeks; caught before costs one meeting.",
+    "Long-context models (Gemini, Claude) handle Step 1 well if you paste in dozens of source notes at once — save smaller/faster models for the iterative gap-wording passes.",
+    "A gap stated as a question ('has X been studied in Y context?') is easier to verify than one stated as a claim ('no one has studied X') — prefer the question form."
+  ]
+}

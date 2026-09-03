@@ -108,3 +108,11 @@ Add an entry to `data/categories.json`:
 | 🛠️ Refactoring & Code Review | Intent-driven testing, architecture evaluation, legacy migration |
 | 🎓 Content & Course Design | Question-first learning scaffolds, slide decks, reading guides |
 | 🧩 Meta-Prompting & System Setup | System prompt design, evaluation matrices, JSON extraction schemas |
+| 🌱 AI Fundamentals & Everyday Use | Prompting basics, everyday writing and decision helpers, safe-use habits |
+
+## License
+
+Dual-licensed:
+
+- **Code** (`index.html`, `recipe.html`, `assets/css/styles.css`, `assets/js/*.js`, `.github/workflows/deploy.yml`, and the HTML/CSS markup structure) — [MIT](LICENSE).
+- **Recipe content** (`data/categories.json` and `data/recipes/*.json`) — [CC BY 4.0](LICENSE-CONTENT). Use, adapt, and redistribute freely, with attribution.
