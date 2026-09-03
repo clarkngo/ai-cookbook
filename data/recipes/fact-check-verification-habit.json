@@ -1,0 +1,43 @@
+{
+  "id": "fact-check-verification-habit",
+  "title": "Fact-Check Before You Trust It",
+  "category": "ai-fundamentals",
+  "difficulty": "Beginner",
+  "targetLLMs": ["Claude", "OpenAI", "Gemini", "Ollama"],
+  "estTime": "10 min",
+  "tags": ["new-to-ai", "fact-checking", "ai-literacy", "safety"],
+  "problem": "LLMs generate fluent, confident-sounding text even when it's wrong. New users often copy answers straight into real use — emails, homework, decisions — without realizing a model can be completely confident and completely incorrect at the same time, especially about specific facts, dates, numbers, quotes, and citations.",
+  "workflow": [
+    {
+      "step": "1. Ask the model to answer normally first",
+      "detail": "Get the direct answer to your actual question before adding any verification step — don't complicate the first ask."
+    },
+    {
+      "step": "2. Ask it to flag its own uncertain claims",
+      "detail": "As a follow-up (or in the same prompt, using the template below), ask which specific facts, numbers, or names in its own answer it's less sure about."
+    },
+    {
+      "step": "3. Verify only the flagged claims",
+      "detail": "Check those specific points against a real source — a search, a document, a person — rather than re-verifying the entire answer from scratch."
+    },
+    {
+      "step": "4. Verify high-stakes claims regardless of flags",
+      "detail": "For anything involving money, health, legal matters, or grades, check even the claims the model marked as confident — self-reported confidence is a helpful signal, not a guarantee."
+    },
+    {
+      "step": "5. Build the habit",
+      "detail": "Treat 'this sounds right' as a reason to spend two minutes checking, not a reason to trust it outright — especially the more specific and confident a claim sounds."
+    }
+  ],
+  "promptTemplate": "{{QUESTION}}\n\nAfter answering, go back through your own answer and list any specific facts, numbers, dates, names, or claims that you are not fully certain are correct, and briefly say why they might be uncertain.",
+  "variables": [
+    { "name": "QUESTION", "label": "Your question", "placeholder": "e.g. What were the main causes of the 2008 financial crisis?", "default": "" }
+  ],
+  "exampleOutput": "**Answer:** [normal explanation of the 2008 crisis]\n\n**Flagged claims:**\n- \"Lehman Brothers collapsed in September 2008\" — I'm confident in this date.\n- \"Approximately 10 million Americans lost their homes\" — this specific figure varies by source and time period measured; worth checking against a specific report if precision matters.",
+  "tips": [
+    "This step doesn't make an answer trustworthy on its own — it tells you where to spend your limited verification time.",
+    "For anything involving money, health, legal matters, or academic citations, verify even the claims the model marks as confident.",
+    "Smaller or local models are often worse at accurately self-flagging uncertainty than large hosted ones — treat their self-assessment with extra skepticism.",
+    "If a model gives you a specific quote, statistic, or citation, assume it needs checking by default — these are the categories LLMs get subtly wrong most often."
+  ]
+}

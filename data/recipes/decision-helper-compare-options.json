@@ -1,0 +1,44 @@
+{
+  "id": "decision-helper-compare-options",
+  "title": "Decision Helper: Compare Your Options",
+  "category": "ai-fundamentals",
+  "difficulty": "Beginner",
+  "targetLLMs": ["Claude", "OpenAI", "Gemini"],
+  "estTime": "10 min",
+  "tags": ["new-to-ai", "decision-making", "everyday-use"],
+  "problem": "New users often ask AI 'what should I do?' and get a wishy-washy non-answer, because the model doesn't know what actually matters to them — it needs your criteria, not just your options, to give a useful recommendation.",
+  "workflow": [
+    {
+      "step": "1. List your actual options",
+      "detail": "Name the 2–5 choices you're deciding between. More than that tends to make any comparison muddy and less useful."
+    },
+    {
+      "step": "2. State what matters to you",
+      "detail": "In your own words, ideally ranked — cost, time, risk, convenience, whatever it actually is for this decision. This is the part a generic pros/cons list is missing."
+    },
+    {
+      "step": "3. Ask for a comparison table",
+      "detail": "Run the Prompt Template to get the options compared specifically against your stated criteria, not a generic feature list."
+    },
+    {
+      "step": "4. Ask for a forced recommendation",
+      "detail": "Ask which option the model would pick given your criteria, and why. A forced pick with reasoning is more useful than 'it depends.'"
+    },
+    {
+      "step": "5. Treat it as one input, not the decision",
+      "detail": "Especially for anything high-stakes — money, health, relationships, legal matters — use this as a way to organize your own thinking, then decide yourself or consult a qualified professional."
+    }
+  ],
+  "promptTemplate": "I'm deciding between these options: {{OPTIONS}}\n\nWHAT MATTERS TO ME (in order of importance): {{CRITERIA}}\n\nCompare the options against my criteria in a table, then tell me which one you'd pick given my criteria specifically, and why.",
+  "variables": [
+    { "name": "OPTIONS", "label": "Your options", "placeholder": "e.g. Option A: used car, $8k, 60k miles. Option B: new car lease, $280/month.", "default": "" },
+    { "name": "CRITERIA", "label": "What matters to you (ranked)", "placeholder": "1. Lowest total cost over 3 years\n2. Low chance of surprise repair bills\n3. Don't want a long-term commitment", "default": "" }
+  ],
+  "exampleOutput": "| Criterion | Used Car | New Lease |\n|---|---|---|\n| 3-year total cost | ~$9,500 incl. est. repairs | ~$10,080, no repair risk |\n| Repair risk | Moderate — older vehicle | Low — under warranty |\n| Commitment | None after purchase | 3-year lease term |\n\n**Recommendation:** Given your #1 priority is lowest total cost and #3 is avoiding long-term commitment, the used car edges out — the lease's predictability comes at the cost of the multi-year commitment you said you want to avoid.",
+  "tips": [
+    "Keep to 2–5 options — beyond that, the comparison gets muddy and harder to act on.",
+    "State criteria in your own words and rough order of importance — this is what turns a generic pros-and-cons list into an actual recommendation.",
+    "For high-stakes decisions (financial, medical, legal), treat the output as one input among several, not the final word — say so explicitly and consult a qualified professional.",
+    "If the recommendation surprises you, ask why — the reasoning is often more useful than the pick itself."
+  ]
+}

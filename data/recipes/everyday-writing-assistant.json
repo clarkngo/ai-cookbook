@@ -1,0 +1,48 @@
+{
+  "id": "everyday-writing-assistant",
+  "title": "Everyday Writing Assistant",
+  "category": "ai-fundamentals",
+  "difficulty": "Beginner",
+  "targetLLMs": ["Claude", "OpenAI", "Gemini"],
+  "estTime": "10–15 min",
+  "tags": ["new-to-ai", "writing", "email", "everyday-use"],
+  "problem": "New users often ask AI to 'write an email about X' and get a generic, off-tone draft they end up heavily rewriting — because the model wasn't given the two things that actually determine good writing: who it's going to, and what you want to happen after they read it.",
+  "workflow": [
+    {
+      "step": "1. State who's receiving this",
+      "detail": "Name the recipient and your relationship to them — a message to your manager and one to a close coworker should sound different, and the model needs to know which."
+    },
+    {
+      "step": "2. State the outcome you want",
+      "detail": "Not just the topic — what should happen after they read it? Reply by Friday? Agree to a meeting? Feel reassured? This shapes tone and structure more than the topic does."
+    },
+    {
+      "step": "3. Give key points as bullet notes",
+      "detail": "Jot rough bullet points, not full sentences — let the model handle the prose. Full sentences tend to get copied verbatim and read stiffly."
+    },
+    {
+      "step": "4. Specify tone and length",
+      "detail": "Run the Prompt Template with a tone description (e.g. 'direct but warm, no corporate jargon') and a rough length."
+    },
+    {
+      "step": "5. Read it out loud before sending",
+      "detail": "The fastest way to catch a tone mismatch. If a phrase doesn't sound like something you'd actually say, edit it — a draft is a draft, not your final voice."
+    }
+  ],
+  "promptTemplate": "Write a {{TYPE}} to {{RECIPIENT}}.\n\nMY RELATIONSHIP TO THEM: {{RELATIONSHIP}}\n\nWHAT I WANT TO HAPPEN AFTER THEY READ IT: {{DESIRED_OUTCOME}}\n\nKEY POINTS TO INCLUDE:\n{{KEY_POINTS}}\n\nTONE: {{TONE}}",
+  "variables": [
+    { "name": "TYPE", "label": "Type of message", "placeholder": "e.g. email", "default": "" },
+    { "name": "RECIPIENT", "label": "Recipient", "placeholder": "e.g. my landlord", "default": "" },
+    { "name": "RELATIONSHIP", "label": "Your relationship to them", "placeholder": "e.g. Professional but not close; we've emailed a handful of times", "default": "" },
+    { "name": "DESIRED_OUTCOME", "label": "Desired outcome", "placeholder": "e.g. Get the broken heater fixed this week, in writing so there's a record", "default": "" },
+    { "name": "KEY_POINTS", "label": "Key points (bullet notes)", "placeholder": "- Heater stopped working Tuesday\n- Apartment is 58°F\n- Already tried resetting the breaker\n- Need it fixed by Friday", "default": "" },
+    { "name": "TONE", "label": "Tone", "placeholder": "e.g. Polite but firm, no exclamation points", "default": "" }
+  ],
+  "exampleOutput": "Subject: Heater Repair Needed This Week\n\nHi [Landlord],\n\nOur heater stopped working on Tuesday and the apartment has been at 58°F since. I reset the breaker, which didn't resolve it. Could someone come take a look and repair it by Friday? Please let me know a time that works.\n\nThanks,\n[Name]",
+  "tips": [
+    "Bullet notes, not full sentences, in KEY_POINTS — full sentences tend to get copied verbatim and read stiffly next to the model's own prose.",
+    "Always read the draft out loud before sending — it's the fastest way to catch a tone mismatch.",
+    "Save a TONE description that works for you (e.g. 'direct but warm, no corporate jargon') and reuse it across prompts for a consistent voice over time.",
+    "For anything sensitive or high-stakes (HR, legal, a difficult personal message), use the draft as a starting point you heavily edit — not something to send unread."
+  ]
+}

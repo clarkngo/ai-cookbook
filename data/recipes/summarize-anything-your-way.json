@@ -1,0 +1,46 @@
+{
+  "id": "summarize-anything-your-way",
+  "title": "Summarize Anything, Your Way",
+  "category": "ai-fundamentals",
+  "difficulty": "Beginner",
+  "targetLLMs": ["Claude", "OpenAI", "Gemini", "Ollama"],
+  "estTime": "5–10 min",
+  "tags": ["new-to-ai", "summarization", "everyday-use", "getting-started"],
+  "problem": "A plain 'summarize this' often comes back the wrong length, misses the part you actually cared about, or reads like a book report — because the model was never told what the summary is FOR, only what text to shrink.",
+  "workflow": [
+    {
+      "step": "1. State the purpose",
+      "detail": "Say what you'll use the summary for — deciding something, skimming before a meeting, sharing with someone else. This changes what belongs in it more than the source text does."
+    },
+    {
+      "step": "2. Set a real length constraint",
+      "detail": "Give a word count or number of bullets, not 'make it short' — a concrete number gets a far more consistent result."
+    },
+    {
+      "step": "3. Name what to prioritize",
+      "detail": "If there's a tradeoff (numbers over narrative, decisions over discussion), say so explicitly."
+    },
+    {
+      "step": "4. Paste the actual text",
+      "detail": "Don't rely on the model to fetch or remember a document or link — paste the real content so it can't guess or hallucinate what's in it."
+    },
+    {
+      "step": "5. Ask follow-ups instead of restarting",
+      "detail": "If the summary is missing something you needed, ask 'also pull out X' rather than rewriting the whole prompt."
+    }
+  ],
+  "promptTemplate": "Summarize the text below for the purpose of: {{PURPOSE}}\n\nLENGTH: {{LENGTH}}\n\nPRIORITIZE: {{PRIORITY}}\n\nTEXT:\n{{TEXT}}",
+  "variables": [
+    { "name": "PURPOSE", "label": "Purpose", "placeholder": "e.g. Deciding whether to attend this event", "default": "" },
+    { "name": "LENGTH", "label": "Length", "placeholder": "e.g. 3 bullet points", "default": "" },
+    { "name": "PRIORITY", "label": "Prioritize", "placeholder": "e.g. Dates, cost, and any action I need to take", "default": "" },
+    { "name": "TEXT", "label": "Text to summarize", "placeholder": "Paste the actual email, article, or document text here...", "default": "" }
+  ],
+  "exampleOutput": "- Event is Saturday, March 14, 6–9pm, downtown venue.\n- Tickets are $45 until March 1, then $60.\n- Action needed: RSVP by Feb 28 to get the early rate.",
+  "tips": [
+    "Always paste the actual text rather than a link — most models can't reliably browse, and will otherwise guess at or invent the content.",
+    "'3 bullet points' gets a more consistent result than 'keep it short' — vague length requests produce inconsistent results across runs.",
+    "For very long documents, summarize in sections and then ask for a summary-of-summaries — a single giant paste can cause a model to skim the middle.",
+    "If you're going to make a decision based on the summary, skim the original source's key section yourself too — a summary trades detail for speed, which is sometimes the wrong trade."
+  ]
+}

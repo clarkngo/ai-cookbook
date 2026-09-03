@@ -1,0 +1,45 @@
+{
+  "id": "authentic-assessment-redesign",
+  "title": "Authentic Assessment Redesign for the AI Era",
+  "category": "content-course-design",
+  "difficulty": "Advanced",
+  "targetLLMs": ["Claude", "OpenAI"],
+  "estTime": "45–75 min",
+  "tags": ["higher-education", "assessment", "academic-integrity", "authentic-assessment"],
+  "problem": "Take-home essays and generic problem sets are now trivial for students to generate with an LLM, but banning AI outright is unenforceable and out of step with how students will actually work after graduation. The more durable fix is redesigning the assessment itself so it measures something an LLM can't easily fake — process, personal context, or in-the-moment reasoning.",
+  "workflow": [
+    {
+      "step": "1. Name what you're actually measuring",
+      "detail": "Separate 'can produce this artifact' from 'can do the underlying skill' for the current assessment. Most AI-vulnerable assignments conflate the two."
+    },
+    {
+      "step": "2. Generate redesign options",
+      "detail": "Run the Prompt Template for 3–4 concrete redesign directions — e.g. an oral defense, a process log, personalizing to the student's own data, or moving reasoning in-class."
+    },
+    {
+      "step": "3. Human feasibility check",
+      "detail": "Weigh each option against your actual grading capacity and class size — the model can't see your TA budget or LMS limitations."
+    },
+    {
+      "step": "4. Draft the new assessment and its AI-use policy",
+      "detail": "Be explicit about what's allowed (e.g. 'AI for brainstorming, not final prose') so the policy itself isn't the vague part of the assignment."
+    },
+    {
+      "step": "5. Pilot on one assignment first",
+      "detail": "The tell for a good redesign is that a genuinely capable student enjoys it more — not just that it's harder to fake. Roll out course-wide only after piloting."
+    }
+  ],
+  "promptTemplate": "Help me redesign an assessment to be resilient to AI-generated submissions while staying fair and gradable at scale.\n\nCURRENT ASSESSMENT:\n{{CURRENT_ASSESSMENT}}\n\nSKILL IT'S SUPPOSED TO MEASURE:\n{{SKILL}}\n\nCLASS CONTEXT (size, grading support, format constraints):\n{{CLASS_CONTEXT}}\n\n1. Identify what about the current format makes it easy to fake with AI without demonstrating the underlying skill.\n2. Propose 3-4 concrete redesign options (e.g. process documentation, oral component, personalized data, in-class element), each with a one-line tradeoff.\n3. For your top recommendation, draft the revised assessment prompt and an explicit AI-use policy statement for it.",
+  "variables": [
+    { "name": "CURRENT_ASSESSMENT", "label": "Current assessment", "placeholder": "e.g. Take-home 5-page essay analyzing a case study", "default": "" },
+    { "name": "SKILL", "label": "Skill it's supposed to measure", "placeholder": "e.g. Applying a theoretical framework to a novel case", "default": "" },
+    { "name": "CLASS_CONTEXT", "label": "Class context", "placeholder": "e.g. 120 students, 2 TAs, one 75-min class period per week available for in-class work", "default": "" }
+  ],
+  "exampleOutput": "**Why it's vulnerable:** A generic case study essay can be fully drafted by an LLM without the student ever applying the framework themselves.\n\n**Options:**\n1. Add a 5-minute oral defense on one paragraph, picked at random — tradeoff: TA time per student.\n2. Require a submitted outline + 2 drafts with tracked changes — tradeoff: more grading touchpoints, but no extra class time.\n3. Personalize the case to a dataset unique to each student — tradeoff: upfront design time, low per-student cost after.\n\n**Recommended redesign + AI-use policy:** ... 'You may use AI to check grammar or brainstorm structure. The analysis and final argument must be your own; you'll be asked to explain any paragraph in a short oral check.'",
+  "tips": [
+    "State your AI-use policy on the assessment itself, not just the syllabus — a policy students read once in week 1 gets forgotten by week 10.",
+    "An oral defense or process log doesn't need to cover 100% of an assignment's weight to work — even a 10-minute spot-check component changes incentives.",
+    "Don't treat 'harder to fake' as the only success criterion — a redesign that also gives students a better learning experience is more durable than a pure integrity patch.",
+    "Pilot on the assignment with the least grading load first, since a first pilot always surfaces logistics you didn't anticipate."
+  ]
+}

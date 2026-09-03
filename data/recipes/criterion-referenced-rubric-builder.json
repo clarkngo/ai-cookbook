@@ -1,0 +1,46 @@
+{
+  "id": "criterion-referenced-rubric-builder",
+  "title": "Criterion-Referenced Rubric Builder",
+  "category": "content-course-design",
+  "difficulty": "Beginner",
+  "targetLLMs": ["Claude", "OpenAI", "Gemini"],
+  "estTime": "20–35 min",
+  "tags": ["higher-education", "rubric", "assessment", "grading"],
+  "problem": "Hand-written rubrics drift toward vague, holistic language — 'good analysis', 'clear writing' — that different graders and TAs interpret inconsistently. That inconsistency is the single biggest source of grading-fairness complaints in multi-section courses.",
+  "workflow": [
+    {
+      "step": "1. State the assignment and outcome",
+      "detail": "Write one sentence naming the assignment and the specific outcome it's meant to measure."
+    },
+    {
+      "step": "2. Generate draft performance levels",
+      "detail": "Run the Prompt Template to get 3–4 levels per criterion (e.g. Exemplary/Proficient/Developing/Beginning) written in observable, specific language."
+    },
+    {
+      "step": "3. Human calibration pass",
+      "detail": "Score 2–3 real or sample student submissions against the draft rubric yourself. Note any level where your judgment and the rubric's wording disagree."
+    },
+    {
+      "step": "4. Patch disputed levels",
+      "detail": "Feed each disagreement back as a targeted revision request for that one criterion/level — not a full regeneration of the rubric."
+    },
+    {
+      "step": "5. Pilot with a second grader",
+      "detail": "Before rolling out across sections, have a TA or co-instructor score the same sample. If their scores diverge from yours, the rubric language is still too vague."
+    }
+  ],
+  "promptTemplate": "Build a criterion-referenced rubric for grading.\n\nASSIGNMENT:\n{{ASSIGNMENT}}\n\nOUTCOME IT MEASURES:\n{{OUTCOME}}\n\nCRITERIA TO INCLUDE:\n{{CRITERIA}}\n\nPERFORMANCE LEVELS:\n{{LEVELS}}\n\nFor each criterion, write observable, specific descriptions at each performance level — avoid vague terms like 'good' or 'excellent' without saying what makes them so. Output as a markdown table with criteria as rows and levels as columns.",
+  "variables": [
+    { "name": "ASSIGNMENT", "label": "Assignment", "placeholder": "e.g. 1500-word argumentative essay on a primary source", "default": "" },
+    { "name": "OUTCOME", "label": "Outcome it measures", "placeholder": "e.g. Construct a thesis-driven argument supported by textual evidence", "default": "" },
+    { "name": "CRITERIA", "label": "Criteria to include", "placeholder": "e.g. Thesis clarity, use of evidence, organization, mechanics", "default": "" },
+    { "name": "LEVELS", "label": "Performance levels", "placeholder": "e.g. Exemplary, Proficient, Developing, Beginning", "default": "" }
+  ],
+  "exampleOutput": "| Criterion | Exemplary | Proficient | Developing | Beginning |\n|---|---|---|---|---|\n| Thesis clarity | Thesis is arguable, specific, and previewed in the intro | Thesis is arguable but broad or previewed late | Thesis is present but descriptive, not arguable | No identifiable thesis |\n| Use of evidence | Every claim cited with a specific passage and explained | Most claims cited; some explanation thin | Evidence present but disconnected from claims | Little to no textual evidence |",
+  "tips": [
+    "If two graders score the same sample differently after using the rubric, the fix is more specific language at the disputed level — not more levels.",
+    "For multi-section courses, run the calibration pass with every grading TA before the semester starts, not the week grades are first due.",
+    "Reuse the same CRITERIA wording across assignments in a course to build a consistent rubric 'vocabulary' students learn to recognize.",
+    "Keep LEVELS to 3–4 — more than that tends to blur into distinctions no grader can reliably apply."
+  ]
+}

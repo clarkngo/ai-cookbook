@@ -1,0 +1,26 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Clark Ngo
+
+This applies to the recipe content of AI Cookbook: the categories in
+data/categories.json and the recipe definitions in data/recipes/*.json
+(titles, problem statements, workflows, prompt templates, variables,
+example output, and tips).
+
+This work is licensed under the Creative Commons Attribution 4.0
+International License. To view a copy of this license, visit
+https://creativecommons.org/licenses/by/4.0/ or send a letter to Creative
+Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+You are free to:
+  - Share — copy and redistribute the material in any medium or format
+  - Adapt — remix, transform, and build upon the material
+  for any purpose, even commercially, as long as you give appropriate
+  credit, provide a link to the license, and indicate if changes were made.
+
+Suggested attribution:
+  "AI Cookbook" by Clark Ngo (https://github.com/clarkngo/ai-cookbook),
+  licensed under CC BY 4.0.
+
+The site's code (HTML/CSS structure, JavaScript, and GitHub Actions
+workflow) is licensed separately under the MIT License — see LICENSE.
